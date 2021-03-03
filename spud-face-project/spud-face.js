@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 const allFormElements = document.querySelectorAll("[type='text']");
 const allCardElements = document.getElementsByClassName("license_info");
 
-console.log(allFormElements)
+// console.log(allFormElements)
 
 for (let i = 0; i < allFormElements.length; i++) {
   let eachElement = allFormElements[i];
@@ -14,6 +14,7 @@ for (let i = 0; i < allFormElements.length; i++) {
       cardField.innerHTML = event.target.value;
     }
   })
+  
 }
 
 //Title
@@ -86,10 +87,23 @@ formOrganDonor.addEventListener("click", (event) => {
 // let one = allFormElements.forEach(element => {
 //   return element
 // });
+const licenseNum = document.getElementById("license-num");
+const licenseNumConfirm = document.getElementById("license-num-confirm");
 const formId = document.getElementById("drivers-license-form")
+
 formId.addEventListener("focus", (event) => {
   event.target.style.backgroundColor = "lightgreen"
-    
+
+  if(document.getElementById("card-license-num").value !== document.getElementById("license-num-confirm").value){
+    if()
+    document.getElementById("card-license-num").style.backgroundColor = "lightcoral"
+    document.getElementById("license-num-confirm").style.backgroundColor = "lightcoral"
+  }
+
+
+  
+  
+  
 
 }, true);
 
@@ -99,9 +113,35 @@ formId.addEventListener("blur", (event) => {
 
 
 // ** Phase 3: Check that license numbers match **
- 
+
+const cardLicenseNumber = document.getElementById("card-license-num");
+
+licenseNum.addEventListener("input", (event) => {
+  licenseNumConfirm.addEventListener("input", (event2) => {
+    if(licenseNum.value !== licenseNumConfirm.value){
+      licenseNum.style.backgroundColor= "lightcoral"
+      licenseNumConfirm.style.backgroundColor= "lightcoral"
+    }else{
+      cardLicenseNumber.innerHTML = licenseNumConfirm.value
+    }
+  });
+});
+
+// if(licenseNum.value !== licenseNumConfirm.value){
+//   event.preventDefault()
+//   alert("DOES NOT MATCH")
+// }else{
+//   alert("CORRECT MATCH")
+// }
 
 // ** Phase 4: Update submit button click count **
+const submitButton = document.querySelector(".form__submit")
+let counterValue = 0
 
- 
+submitButton.addEventListener("click", (event) => {
+  counterValue++
+  submitButton.innerHTML = counterValue
+  event.preventDefault()
+});
+
 });
